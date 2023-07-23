@@ -1,0 +1,49 @@
+doctype html
+
+include includes/mixins
+
+head
+  include includes/header.pug
+  script(src='https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js', defer)
+  script(src='commands.js', defer)
+  script(defer).
+    let commands = !{commandsString};
+    console.log(commands);
+
+
+  style.
+    .spacing{
+      padding: 0 20%;
+    }
+
+    #search {
+      max-width: 300px;
+    }
+//Code for Navbar
+include includes/nav.pug
+
+// This is the code for the content
+.jumbotron.text-center.spacing
+  h1.display-4 Commands
+  p.lead View your commands for your bot
+  hr.opacity-25
+
+  //This is the code or search box
+  section
+    .d-flex.justify-content-center 
+      #search.form-group.p-3 
+        input.form-control(type='search')
+      button.btn 
+        i.fa.fa-search(aria-hidden='true')
+
+
+  // Table
+  .row 
+    .col.sm-3.categories
+      ul.list-group.mb-2
+        each category in categories 
+          +category(category)
+    .col.sm-9.commands
+      ul.list-group.mb-2
+        +commandsInfo(latestGuild)
+        +qrCode(qrCommand)

@@ -1,0 +1,22 @@
+mixin category(category)
+    li.list-group-item(data-category=category.name) #[i(class=category.icon)] #{category.name} 
+
+
+//mixin command(command)
+//    li.list-group-item(data-command=command.name) #{command.name} 
+
+mixin commandsInfo(latestGuild)
+    li.list-group-item.commands.commands-info
+        h3 Prefix Information
+        p Guild ID: #{latestGuild.guildId}
+        p Prefix Symbol: #{latestGuild.prefix}
+
+mixin qrCode(qrCommand)
+    li.list-group-item.commands.qr-command 
+        h3 QR Commands 
+        if qrCommand
+            p Word: #{qrCommand.word}
+            p QR Code: 
+            img(src=qrCommand.url, alt='qrCode')
+        else 
+            p no data added yet
