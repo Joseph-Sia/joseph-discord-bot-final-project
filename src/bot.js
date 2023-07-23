@@ -6,11 +6,12 @@ const path = require("path");
 const app = express();
 const port = 3000;
 const ytdl = require('ytdl-core');
+require('dotenv').config()
 app.set ('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Connect our mongoose to our project
-mongoose.connect('mongodb://localhost/discord-bot-final-project', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const prefixes = mongoose.model('prefixes', new mongoose.Schema({
     guildId: String,
     prefix: String
@@ -168,4 +169,4 @@ app.get('/commands', async(req, res) => {
 
 app.listen(port, function(){console.log(`Server started at port ${port}`)});
 
-client.login("OTM0Njc4MTY4MDAwOTQ2MjE3.Ga3Bcm.ls1NvprW5F0fT4axorji3QVaiNSPUGlx6iUcrs");
+client.login(process.env.BOT_TOKEN);
