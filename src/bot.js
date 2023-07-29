@@ -6,7 +6,9 @@ const path = require("path");
 const app = express();
 const port = 3000;
 const ytdl = require('ytdl-core');
-require('dotenv').config()
+const dotenv = require('dotenv');
+dotenv.config();
+
 app.set ('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -27,8 +29,6 @@ const qrCommands = mongoose.model('qrCommands', new mongoose.Schema({
 client.on('ready', function() {
     console.log("Bot is ready!");
 });
-
-
 
 // To add feature for our bot
 client.on('message', async message => {
